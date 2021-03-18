@@ -208,15 +208,14 @@ namespace ListsEnForeachOefeningen
 
             int SelectMenu(params string[] menu)
             {
+                int selection = 1;
+                bool selected = false;               
+                ConsoleColor selectionForeground = Console.BackgroundColor;
+                ConsoleColor selectionBackground = Console.ForegroundColor;
+                
                 Console.SetCursorPosition(0, 0);
                 Console.CursorVisible = false;
                 Console.Clear();
-
-                int selection = 1;
-                bool selected = false;
-                ConsoleColor selectionForeground = Console.BackgroundColor;
-                ConsoleColor selectionBackground = Console.ForegroundColor;
-
                 while (!selected)
                 {
                     for (int i = 0; i < menu.Length; i++)
@@ -229,7 +228,6 @@ namespace ListsEnForeachOefeningen
                         Console.WriteLine((i + 1) + ": " + menu[i]);
                         Console.ResetColor();
                     }
-
                     switch (Console.ReadKey(true).Key)
                     {
                         case ConsoleKey.UpArrow:
@@ -241,6 +239,14 @@ namespace ListsEnForeachOefeningen
                         case ConsoleKey.Enter:
                             selected = true;
                             break;
+                        case ConsoleKey.D1:
+                        case ConsoleKey.NumPad1: selection = 1; break;
+                        case ConsoleKey.D2:
+                        case ConsoleKey.NumPad2: selection = 2; break;
+                        case ConsoleKey.D3:
+                        case ConsoleKey.NumPad3: selection =  3 <= menu.Length ? 3:menu.Length; break;
+                        case ConsoleKey.D4:
+                        case ConsoleKey.NumPad4: selection =  4 <= menu.Length ? 4 : menu.Length; break;
                     }
 
                     selection = Math.Min(Math.Max(selection, 1), menu.Length);
@@ -255,26 +261,21 @@ namespace ListsEnForeachOefeningen
             char InputChr(params string[] tekst)
             {
                 for (int i = 0; i < tekst.GetLength(0); i++)
-                {
                     Console.WriteLine(tekst[i]);
-                }
                 ConsoleKeyInfo keyStrike = Console.ReadKey(true);
                 return keyStrike.KeyChar;
             }
             string InputStr(params string[] tekst)
             {
                 for (int i = 0; i < tekst.GetLength(0); i++)
-                {
                     if (tekst.GetLength(0)==1) Console.Write(tekst[i]);
                     else Console.WriteLine(tekst[i]);
-                }
                 return Console.ReadLine();
             }
             bool InputBool(string tekst = "j/n", bool Cyes = true, bool Cno = false)
             {
                 Console.WriteLine(tekst);
                 ConsoleKeyInfo keyStrike = Console.ReadKey(true);
-
                 switch (Char.ToLower(keyStrike.KeyChar))
                 {
                     case 'y':
