@@ -15,7 +15,6 @@ namespace ListsEnForeachOefeningen
         {
             Process.Start(@"C:\Program Files\Mozilla Firefox\firefox.exe", URL);
         }
-
         public void VerwijderGegevens()
         {
             Naam = "";

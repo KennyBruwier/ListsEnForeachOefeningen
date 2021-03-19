@@ -17,7 +17,6 @@ namespace ListsEnForeachOefeningen
             void Prijzen()
             {
                 Random rnd = new Random();
-
                 double[] prijzen = new double[20];
                 double gem = 0;
                 for (int i = 0; i < prijzen.Length; i++)
@@ -31,8 +30,7 @@ namespace ListsEnForeachOefeningen
                     if (prijzen[i] >= 5) Console.WriteLine(prijzen[i]);
                     gem += prijzen[i];
                 }
-                Console.WriteLine($"Gemiddelde: {gem}");
-
+                Console.WriteLine($"Gemiddelde: {gem/=prijzen.Length}");
             }
 
             void Speelkaarten()
@@ -48,9 +46,7 @@ namespace ListsEnForeachOefeningen
             {
                 List<Student> studenten = new List<Student>();
                 for (int i = 0; i < 5; i++)
-                {
                     studenten.Add(new Student());
-                }
                 bool exit = false;
                 while (!exit)
                 {
@@ -75,9 +71,7 @@ namespace ListsEnForeachOefeningen
                                     }
                                     Console.WriteLine(iAntw);
                                     if ((studenten[iAntw - 1].Naam != "")&&(studenten[iAntw - 1].Naam != null))
-                                    {
                                         overschrijven = InputBool($"Student {studenten[iAntw - 1].Naam} overschrijven?");
-                                    }
                                     else overschrijven = true;
                                 }
                                 studenten[iAntw - 1].Naam = InputStr("Naam: ");
@@ -94,13 +88,11 @@ namespace ListsEnForeachOefeningen
                                 Console.Clear();
                                 Console.WriteLine("Overzicht alle studenten: ");
                                 foreach (Student student in studenten)
-                                {
                                     if ((student.Naam != "") && (student.Naam != null))
                                     {
                                         Console.WriteLine();
                                         student.GeefOverzicht();
                                     }
-                                }
                                 Console.ReadLine();
                             }
                             break;
@@ -108,20 +100,16 @@ namespace ListsEnForeachOefeningen
                             {
                                 List<string> studentNamen = new List<string>(); 
                                 foreach (Student student in studenten)
-                                {
                                     if (student.Naam != "") studentNamen.Add(student.Naam);
-                                }
                                 string teVerwijderen = studentNamen[SelectMenu(studentNamen.ToArray()) - 1];
                                 bool verwijderd = false;
                                 foreach (Student student in studenten)
-                                {
                                     if (student.Naam == teVerwijderen)
                                     {
                                         student.VerwijderGegevens();
                                         verwijderd = true;
                                         break;
                                     }
-                                }
                                 Console.WriteLine(verwijderd?$"Student {teVerwijderen} is verwijderd.":$"Niet gelukt om {teVerwijderen} te verwijderen.");
                                 Console.ReadLine();
                             }
@@ -173,7 +161,7 @@ namespace ListsEnForeachOefeningen
                             {
                                 List<string> bookmarkName = new List<string>();
                                 foreach(Bookmark bookmark in bookmarks)
-                                    if ((bookmark.Naam != "")&& (bookmark.Naam != null)) bookmarkName.Add(bookmark.Naam);
+                                    if ((bookmark.Naam != "") && (bookmark.Naam != null)) bookmarkName.Add(bookmark.Naam);
                                 bookmarkName.Add("Exit");
                                 string teVerwijderen = bookmarkName[SelectMenu(bookmarkName.ToArray()) - 1];
                                 bool verwijderd = false;
@@ -248,22 +236,18 @@ namespace ListsEnForeachOefeningen
                         case ConsoleKey.D4:
                         case ConsoleKey.NumPad4: selection =  4 <= menu.Length ? 4 : menu.Length; break;
                     }
-
                     selection = Math.Min(Math.Max(selection, 1), menu.Length);
                     Console.SetCursorPosition(0, 0);
                 }
-
                 Console.Clear();
                 Console.CursorVisible = true;
-
                 return selection;
             }
             char InputChr(params string[] tekst)
             {
                 for (int i = 0; i < tekst.GetLength(0); i++)
                     Console.WriteLine(tekst[i]);
-                ConsoleKeyInfo keyStrike = Console.ReadKey(true);
-                return keyStrike.KeyChar;
+                return Console.ReadKey(true).KeyChar;
             }
             string InputStr(params string[] tekst)
             {
@@ -275,8 +259,7 @@ namespace ListsEnForeachOefeningen
             bool InputBool(string tekst = "j/n", bool Cyes = true, bool Cno = false)
             {
                 Console.WriteLine(tekst);
-                ConsoleKeyInfo keyStrike = Console.ReadKey(true);
-                switch (Char.ToLower(keyStrike.KeyChar))
+                switch (Char.ToLower(Console.ReadKey(true).KeyChar))
                 {
                     case 'y':
                     case 'j': return Cyes;
